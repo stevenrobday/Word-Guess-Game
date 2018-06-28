@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'retro';
+    src: url('../font/retro.woff2') format('woff2'),
+         url('../font/retro.woff') format('woff');
+}
+
+*{
+    box-sizing: border-box;
+}
+
+/*
+	I'm using the following formula (I found it online and used it previously on my webpage) because it scales well to different resolutions, and I don't want the formatting getting wrecked if the user zooms in or resizes:
+    calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
+*/
+
+body{
+    font-family: 'retro';
+    font-size: calc(12px + (96 - 12) * ((100vw - 300px) / (3840 - 300)));
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+}
+
+#header{
+    width: 100%;
+    font-size: calc(24px + (160 - 24) * ((100vw - 300px) / (3840 - 300)));
+    background-color: #b21030;
+}
+
+#subHeader{
+    width: 100%;
+    font-size: calc(16px + (128 - 16) * ((100vw - 300px) / (3840 - 300)));
+    background-color: #2800ba;
+}
+
+main{
+    margin-top: calc(32px + (64 - 32) * ((100vw - 300px) / (3840 - 300)));
+    border-top: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
+    border-bottom: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
+}
+
+#info{
+    width: 50%;
+    border-right: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff; 
+    float: left;
+    padding: calc(5px + (32 - 5) * ((100vw - 300px) / (3840 - 300)));
+}
+
+#politician{
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: calc(80px + (800 - 80) * ((100vw - 300px) / (3840 - 300)));
+}
+
+#politician img{
+    width: 100%;
+}
+
+#game{
+    width: 50%;
+    float: left;
+    padding: calc(5px + (32 - 5) * ((100vw - 300px) / (3840 - 300)));
+}
+
+main::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
