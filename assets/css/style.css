@@ -41,38 +41,38 @@ table{
     border-collapse: collapse;
 }
 
-td{
+#info, #gameEl{
     border: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
+    width: 50%;
     vertical-align: middle;
 }
 
-#info{
-    width: 50%;
-    padding: calc(5px + (32 - 5) * ((100vw - 300px) / (3840 - 300)));
-}
-
-#politician, #headerPic{
+#reagan, #headerPic{
     left: 0;
     right: 0;
     margin: auto;
     width: calc(80px + (800 - 80) * ((100vw - 300px) / (3840 - 300)));
 }
 
-#politician img, #headerPic img{
-    width: 100%;
-}
-
-#gameEl{
-    width: 50%;
-    padding: calc(5px + (32 - 5) * ((100vw - 300px) / (3840 - 300)));
-}
-
-#info div, #gameEl div, #gameEl div div{
+#reagan{
     margin-top: calc(12px + (96 - 12) * ((100vw - 300px) / (3840 - 300)));
 }
 
-#info div:first-child, #gameEl div:first-child, #gameEl div div:first-child{
-    margin-top: 0;
+#reagan img, #headerPic img{
+    width: 100%;
+}
+
+#info div, #gameEl div, #gameEl div div{
+    margin-bottom: calc(12px + (96 - 12) * ((100vw - 300px) / (3840 - 300)));
+}
+
+#score{
+    width: 100%;
+    border-top: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
+}
+
+#wins{
+    border-right: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
 }
 
 

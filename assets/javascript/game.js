@@ -15,6 +15,11 @@ var gameHeader = document.getElementById("gameHeader");
 var playerAnswerEl = document.getElementById("playerAnswerEl");
 var incorrectGuessesEl = document.getElementById("incorrectGuessesEl");
 var guessesLeftEl = document.getElementById("guessesLeftEl");
+var score = document.getElementById("score");
+var wins = document.getElementById("wins");
+var loses = document.getElementById("loses");
+
+score.style.display = "none";
 
 //create game object
 var gameObj = {
@@ -25,7 +30,7 @@ var gameObj = {
         { politician: "OLIVER NORTH", pic: "north.jpg", fameOrShame: "fame", bio: "After terrorizing a bunch of Commies in Nicaragua, Oliver North drew national fire--from a bunch of Commies!" },
         { politician: "ROBERT BORK", pic: "bork.jpg", fameOrShame: "fame", bio: "He would have been a Supreme Court Justice if it weren't for 58 Commies in the Senate" },
         { politician: "JOHN MCCAIN", pic: "mccain.jpg", fameOrShame: "fame", bio: "One of the Senators who was accused of protecting Charles H. Keating, Jr., Chairman of the Lincoln Savings and Loan Association.  Since this was a private firm, these heroic Senators have since been dubbed 'The Keating Five', a hip band of rebels who don't take no guff from Communists." },
-        { politician: "MICHAEL DUKAKIS", pic: "dukakis.jpg", fameOrShame: "shame", bio: "Michael Dukakis became Laughing Stock of the World after he rode in a tank and released Willie Horton from prison, which is why The UN unanimously declared him 'A National Disgrace'." },
+        { politician: "MICHAEL DUKAKIS", pic: "dukakis.jpg", fameOrShame: "shame", bio: "Michael Dukakis became Laughing Stock of the World after he rode in a tank and busted Willie Horton out of prison, which is why The UN unanimously declared him 'A National Disgrace'." },
         { politician: "ALEXANDER HAIG", pic: "haig.jpg", fameOrShame: "shame", bio: "Once Reagan's Secretary of State, Haig betrayed everybody's trust when he became a Communist by calling George HW Bush 'a wimp' in 1987." }
     ],
 
@@ -35,7 +40,9 @@ var gameObj = {
     guessesLeft: null,
     answerIndex: null,
     answer: null,
-    answerArray: null
+    answerArray: null,
+    wins: 0,
+    loses: 0
 };
 
 document.onkeyup = function (event) {
@@ -50,7 +57,7 @@ document.onkeyup = function (event) {
 
             //get answer based on generated index and stick her in the gameHeader element
             gameObj.answer = gameObj.answers[gameObj.answerIndex].politician;
-            gameHeader.innerHTML = gameObj.answer;
+            gameHeader.innerHTML = "WHO IS RONNIE THINKING OF?";
 
             //put each character of the answer into an array so we can loop through the characters
             gameObj.answerArray = gameObj.answer.split("");
@@ -77,8 +84,12 @@ document.onkeyup = function (event) {
 
             guessesLeftEl.innerHTML = gameObj.guessesLeft + " years in office remaining";
 
-            //set bg back to black in case it was Commie pink
+            //set bg to none in case it was Commie pink
             gameEl.style.backgroundColor = "#000000";
+
+            score.style.display = "none";
+
+            message.innerHTML = "I'm thinking of a politician, can you guess who? There will be no hand-outs, so pull yourself up by your bootstraps and get to work!";
 
             //change game state
             gameObj.state = GAME_STATE_PLAY;
@@ -136,6 +147,13 @@ document.onkeyup = function (event) {
                 gameEl.style.backgroundColor = "#ff61b2";
                 gameHeader.innerHTML = "<div>GAME OVER!</div><div id='headerPic'><img src = 'assets/images/marx.jpg' width='400'></div><div>YOU ARE A COMMUNIST SPY!</div>";
                 message.innerHTML = "Ooh, I spy a Communist spy!  Well, here in America, we don't tolerate villainy from you pinkos!  You'll be ground red meat by the time my CIA is through with the likes of you!  Or, you can push '1' to try again...";
+
+                gameObj.loses++;
+
+                score.style.display = "table";
+                wins.innerHTML = "TIMES A PATRIOT: " + gameObj.wins;
+                loses.innerHTML = "TIMES A COMMIE: " + gameObj.loses;
+
                 gameObj.state = GAME_STATE_TITLE;
             }
             //win condition
@@ -158,6 +176,12 @@ document.onkeyup = function (event) {
                 //educate player about politician
                 gameHeader.innerHTML = "<div id='wallMsgEl'>" + wallMsg + "</div><div>" + gameObj.answer + "</div><div id='headerPic'><img src = 'assets/images/" + gameObj.answers[gameObj.answerIndex].pic + "' width='400'></div><div>" + gameObj.answers[gameObj.answerIndex].bio + "</div>";
                 document.getElementById('wallMsgEl').style.backgroundColor = bgColor;
+                
+                gameObj.wins++;
+
+                score.style.display = "table";
+                wins.innerHTML = "TIMES A PATRIOT: " + gameObj.wins;
+                loses.innerHTML = "TIMES A COMMIE: " + gameObj.loses;
 
                 //remove politician from array
                 gameObj.answers.splice(gameObj.answerIndex, 1);
@@ -171,6 +195,9 @@ document.onkeyup = function (event) {
                 //otherwise, Ronnie takes a nap
                 else {
                     message.innerHTML = "Well, that's all the politicians I can think of, and it's now nap time!  If you ever want to guess from the same list of politicians again, refresh the page!  I'll be waiting...";
+
+                    //we're done with the game, so set the state to null
+                    gameObj.state = null;
                 }
             }
             break;
