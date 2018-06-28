@@ -33,7 +33,7 @@ body{
     background-color: #2800ba;
 }
 
-main{
+#content{
     margin-top: calc(32px + (64 - 32) * ((100vw - 300px) / (3840 - 300)));
     border-top: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
     border-bottom: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
@@ -46,21 +46,29 @@ main{
     padding: calc(5px + (32 - 5) * ((100vw - 300px) / (3840 - 300)));
 }
 
-#politician{
+#politician, #headerPic{
     left: 0;
     right: 0;
     margin: auto;
     width: calc(80px + (800 - 80) * ((100vw - 300px) / (3840 - 300)));
 }
 
-#politician img{
+#politician img, #headerPic img{
     width: 100%;
 }
 
-#game{
+#gameEl{
     width: 50%;
     float: left;
     padding: calc(5px + (32 - 5) * ((100vw - 300px) / (3840 - 300)));
+}
+
+#gameEl div, #gameEl div div{
+    margin-top: calc(12px + (96 - 12) * ((100vw - 300px) / (3840 - 300)));
+}
+
+#gameEl div:first-child, #gameEl div div:first-child{
+    margin-top: 0;
 }
 
 main::after{

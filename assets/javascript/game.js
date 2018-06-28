@@ -2,6 +2,9 @@
 var GAME_STATE_TITLE = 0;
 var GAME_STATE_PLAY = 1;
 
+var content = document.getElementById("content");
+var message = document.getElementById("message");
+var gameEl = document.getElementById("gameEl");
 var gameHeader = document.getElementById("gameHeader");
 var playerAnswerEl = document.getElementById("playerAnswerEl");
 var incorrectGuessesEl = document.getElementById("incorrectGuessesEl");
@@ -9,14 +12,14 @@ var guessesLeftEl = document.getElementById("guessesLeftEl");
 
 var gameObj = {
     answers: [
-        "RONALD REAGAN",
-        "GEORGE HW BUSH",
-        "WALTER MONDALE",
-        "OLIVER NORTH",
-        "ROBERT BORK",
-        "JOHN MCCAIN",
-        "MICHAEL DUKAKIS",
-        "ALEXANDER HAIG"
+        {politician: "RONALD REAGAN", pic: "reagan.jpg", fameOrShame: "fame"},
+        {politician: "GEORGE HW BUSH", pic: "bush.jpg", fameOrShame: "fame"},
+        {politician: "WALTER MONDALE", pic: "mondale.jpg", fameOrShame: "shame"},
+        {politician: "OLIVER NORTH", pic: "north.jpg", fameOrShame: "fame"},
+        {politician: "ROBERT BORK", pic: "bork.jpg", fameOrShame: "fame"},
+        {politician: "JOHN MCCAIN", pic: "mccain.jpg", fameOrShame: "fame"},
+        {politician: "MICHAEL DUKAKIS", pic: "dukakis.jpg", fameOrShame: "shame"},
+        {politician: "ALEXANDER HAIG", pic: "haig.jpg", fameOrShame: "shame"}
     ],
 
     state: GAME_STATE_TITLE,
@@ -36,7 +39,7 @@ document.onkeyup = function (event) {
             gameObj.answerIndex = Math.floor(Math.random() * gameObj.answers.length);
 
             //get answer based on generated index and stick her in the gameHeader element
-            gameObj.answer = gameObj.answers[gameObj.answerIndex];
+            gameObj.answer = gameObj.answers[gameObj.answerIndex].politician;
             gameHeader.innerHTML = gameObj.answer;
 
             //put each character of the answer into an array so we can loop through the characters
@@ -87,7 +90,7 @@ document.onkeyup = function (event) {
             }
 
             //proceed if the player didn't already guess incorrectly
-            else if(gameObj.incorrectGuesses.indexOf(guess) === -1){
+            else if (gameObj.incorrectGuesses.indexOf(guess) === -1) {
                 //put the incorrect guess in the corresponding array
                 gameObj.incorrectGuesses.push(guess);
 
@@ -101,7 +104,16 @@ document.onkeyup = function (event) {
                 gameObj.guessesLeft--;
                 guessesLeftEl.innerHTML = gameObj.guessesLeft + " years in office remaining";
             }
-            
+
+            if (gameObj.guessesLeft === 0) {
+                playerAnswerEl.innerHTML = "";
+                incorrectGuessesEl.innerHTML = "";
+                guessesLeftEl.innerHTML = "";
+                gameEl.style.height = content.clientHeight + "px";
+                gameEl.style.backgroundColor = "#ff61b2";
+                gameHeader.innerHTML = "<div>GAME OVER!</div><div id='headerPic'><img src = 'assets/images/marx.jpg' width='400'></div><div>YOU ARE A COMMUNIST SPY!</div>";
+                message.innerHTML = "Ooh, I spy a Communist spy!  Well, here in America, we don't tolerate villainy from you pinkos!  You'll be ground red meat by the time my CIA is through with the likes of you!  Or, you can push any key to try again...";
+            }
             break;
 
     }
