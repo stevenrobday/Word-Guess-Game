@@ -71,7 +71,7 @@ body{
     margin-top: 0;
 }
 
-main::after{
+#content::after{
     content: "";
     display: block;
     clear: both;
