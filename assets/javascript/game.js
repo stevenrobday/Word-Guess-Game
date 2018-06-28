@@ -2,8 +2,6 @@
 var GAME_STATE_TITLE = 0;
 var GAME_STATE_PLAY = 1;
 
-var content = document.getElementById("content");
-var info = document.getElementById("info");
 var message = document.getElementById("message");
 var gameEl = document.getElementById("gameEl");
 var gameHeader = document.getElementById("gameHeader");
@@ -113,10 +111,10 @@ document.onkeyup = function (event) {
                 playerAnswerEl.innerHTML = "";
                 incorrectGuessesEl.innerHTML = "";
                 guessesLeftEl.innerHTML = "";
-                gameEl.style.height = content.scrollHeight + "px";
                 gameEl.style.backgroundColor = "#ff61b2";
                 gameHeader.innerHTML = "<div>GAME OVER!</div><div id='headerPic'><img src = 'assets/images/marx.jpg' width='400'></div><div>YOU ARE A COMMUNIST SPY!</div>";
                 message.innerHTML = "Ooh, I spy a Communist spy!  Well, here in America, we don't tolerate villainy from you pinkos!  You'll be ground red meat by the time my CIA is through with the likes of you!  Or, you can push any key to try again...";
+                gameObj.state = GAME_STATE_TITLE;
             }
             else if (gameObj.playerAnswer.indexOf("_") === -1) {
                 playerAnswerEl.innerHTML = "";
@@ -133,6 +131,18 @@ document.onkeyup = function (event) {
                 }
 
                 gameHeader.innerHTML = "<div id='wallMsgEl'>" + wallMsg + "</div><div>" + gameObj.answer + "</div><div id='headerPic'><img src = 'assets/images/" + gameObj.answers[gameObj.answerIndex].pic + "' width='400'></div><div>" + gameObj.answers[gameObj.answerIndex].bio + "</div>";
+            
+                document.getElementById('wallMsgEl').style.backgroundColor = bgColor;
+
+                gameObj.answers.splice(gameObj.answerIndex, 1);
+
+                if(gameObj.answers.length > 0){
+                    message.innerHTML = "Ooh, that was a lucky guess! " + gameObj.answers.length + " remaining politicians await your challenge! Press any key for the next round!";
+                    gameObj.state = GAME_STATE_TITLE;
+                }
+                else{
+                    message.innerHTML = "Well, that's all the politicians I can think of, and it's now nap time!  If you ever want to guess from the same list of politicians again, refresh the page!  I'll be waiting...";
+                }
             }
             break;
 

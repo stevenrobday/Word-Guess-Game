@@ -33,16 +33,21 @@ body{
     background-color: #2800ba;
 }
 
-#content{
+main{
     margin-top: calc(32px + (64 - 32) * ((100vw - 300px) / (3840 - 300)));
-    border-top: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
-    border-bottom: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td{
+    border: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
+    vertical-align: middle;
 }
 
 #info{
     width: 50%;
-    border-right: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff; 
-    float: left;
     padding: calc(5px + (32 - 5) * ((100vw - 300px) / (3840 - 300)));
 }
 
@@ -59,21 +64,16 @@ body{
 
 #gameEl{
     width: 50%;
-    float: left;
     padding: calc(5px + (32 - 5) * ((100vw - 300px) / (3840 - 300)));
 }
 
-#gameEl div, #gameEl div div{
+#info div, #gameEl div, #gameEl div div{
     margin-top: calc(12px + (96 - 12) * ((100vw - 300px) / (3840 - 300)));
 }
 
-#gameEl div:first-child, #gameEl div div:first-child{
+#info div:first-child, #gameEl div:first-child, #gameEl div div:first-child{
     margin-top: 0;
 }
 
-#content::after{
-    content: "";
-    display: block;
-    clear: both;
-}
+
 
