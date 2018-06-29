@@ -1,3 +1,5 @@
+/*I made this font on https://fontstruct.com/ years ago!*/
+
 @font-face {
     font-family: 'retro';
     src: url('../font/retro.woff2') format('woff2'),
@@ -9,7 +11,9 @@
 }
 
 /*
-	I'm using the following formula (I found it online and used it previously on my webpage) because it scales well to different resolutions, and I don't want the formatting getting wrecked if the user zooms in or resizes:
+    I'm using the following formula (I found it online and used it previously 
+    on my webpage) because it scales well to different resolutions, and I don't 
+    want the formatting getting wrecked if the user zooms in or resizes:
     calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
 */
 
@@ -50,19 +54,22 @@ table{
 #reagan, #headerPic{
     left: 0;
     right: 0;
-    margin: auto;
     width: calc(80px + (800 - 80) * ((100vw - 300px) / (3840 - 300)));
 }
 
 #reagan{
-    margin-top: calc(12px + (96 - 12) * ((100vw - 300px) / (3840 - 300)));
+    margin: calc(6px + (64 - 6) * ((100vw - 300px) / (3840 - 300))) auto;
+}
+
+#headerPic{
+    margin: auto;
 }
 
 #reagan img, #headerPic img{
     width: 100%;
 }
 
-#info div, #gameEl div, #gameEl div div{
+#gameEl div, #gameEl div div{
     margin-bottom: calc(12px + (96 - 12) * ((100vw - 300px) / (3840 - 300)));
 }
 
@@ -75,5 +82,8 @@ table{
     border-right: calc(5px + (8 - 5) * ((100vw - 300px) / (3840 - 300))) dotted #ffffff;
 }
 
+#bio, #message{
+    padding: 0 calc(12px + (24 - 12) * ((100vw - 300px) / (3840 - 300)));
+}
 
 

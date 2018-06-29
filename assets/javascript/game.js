@@ -1,9 +1,3 @@
-/*
-var audio = new Audio('audio.mp3'); // define your audio
-
-$('.btn').click( audio.play ); // that will do the trick !!
-*/
-
 //game states
 var GAME_STATE_TITLE = 0;
 var GAME_STATE_PLAY = 1;
@@ -19,6 +13,7 @@ var score = document.getElementById("score");
 var wins = document.getElementById("wins");
 var loses = document.getElementById("loses");
 
+//hide score display
 score.style.display = "none";
 
 //create game object
@@ -50,7 +45,7 @@ document.onkeyup = function (event) {
 
         case GAME_STATE_TITLE:
             //only proceed if user hit 1
-            if(event.key !== "1") break;
+            if (event.key !== "1") break;
 
             //get a random index
             gameObj.answerIndex = Math.floor(Math.random() * gameObj.answers.length);
@@ -82,13 +77,16 @@ document.onkeyup = function (event) {
             //join the answer array together to be displayed on screen
             playerAnswerEl.innerHTML = gameObj.playerAnswer.join("");
 
+            //display number of guesses left
             guessesLeftEl.innerHTML = gameObj.guessesLeft + " years in office remaining";
 
             //set bg to none in case it was Commie pink
             gameEl.style.backgroundColor = "#000000";
 
+            //hide score display
             score.style.display = "none";
 
+            //Ronnie's new message
             message.innerHTML = "I'm thinking of a politician, can you guess who? There will be no hand-outs, so pull yourself up by your bootstraps and get to work!";
 
             //change game state
@@ -148,12 +146,15 @@ document.onkeyup = function (event) {
                 gameHeader.innerHTML = "<div>GAME OVER!</div><div id='headerPic'><img src = 'assets/images/marx.jpg' width='400'></div><div>YOU ARE A COMMUNIST SPY!</div>";
                 message.innerHTML = "Ooh, I spy a Communist spy!  Well, here in America, we don't tolerate villainy from you pinkos!  You'll be ground red meat by the time my CIA is through with the likes of you!  Or, you can push '1' to try again...";
 
+                //calc loses
                 gameObj.loses++;
 
+                //display score
                 score.style.display = "table";
                 wins.innerHTML = "TIMES A PATRIOT: " + gameObj.wins;
                 loses.innerHTML = "TIMES A COMMIE: " + gameObj.loses;
 
+                //change state back to title
                 gameObj.state = GAME_STATE_TITLE;
             }
             //win condition
@@ -174,11 +175,13 @@ document.onkeyup = function (event) {
                 }
 
                 //educate player about politician
-                gameHeader.innerHTML = "<div id='wallMsgEl'>" + wallMsg + "</div><div>" + gameObj.answer + "</div><div id='headerPic'><img src = 'assets/images/" + gameObj.answers[gameObj.answerIndex].pic + "' width='400'></div><div>" + gameObj.answers[gameObj.answerIndex].bio + "</div>";
+                gameHeader.innerHTML = "<div id='wallMsgEl'>" + wallMsg + "</div><div>" + gameObj.answer + "</div><div id='headerPic'><img src = 'assets/images/" + gameObj.answers[gameObj.answerIndex].pic + "' width='400'></div><div id='bio'>" + gameObj.answers[gameObj.answerIndex].bio + "</div>";
                 document.getElementById('wallMsgEl').style.backgroundColor = bgColor;
-                
+
+                //calc wins
                 gameObj.wins++;
 
+                //display score
                 score.style.display = "table";
                 wins.innerHTML = "TIMES A PATRIOT: " + gameObj.wins;
                 loses.innerHTML = "TIMES A COMMIE: " + gameObj.loses;
