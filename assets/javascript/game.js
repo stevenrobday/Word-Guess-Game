@@ -80,7 +80,7 @@ document.onkeyup = function (event) {
             //display number of guesses left
             guessesLeftEl.innerHTML = gameObj.guessesLeft + " years in office remaining";
 
-            //set bg to none in case it was Commie pink
+            //set bg to black in case it was Commie pink
             gameEl.style.backgroundColor = "#000000";
 
             //hide score display
@@ -191,7 +191,10 @@ document.onkeyup = function (event) {
 
                 //if there's any politicians left, challenge the player to another round
                 if (gameObj.answers.length > 0) {
-                    message.innerHTML = "Ooh, that was a lucky guess! " + gameObj.answers.length + " remaining politicians await your challenge! Press '1' for the next round!";
+                    //proper grammar
+                    var politiciansLeft = gameObj.answers.length === 1 ? "politician awaits" : "politicians await";
+
+                    message.innerHTML = "Ooh, that was a lucky guess! " + gameObj.answers.length + " remaining " + politiciansLeft + " your challenge! Press '1' for the next round!";
                     gameObj.state = GAME_STATE_TITLE;
                 }
 
