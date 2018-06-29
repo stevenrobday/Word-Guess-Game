@@ -130,7 +130,11 @@ document.onkeyup = function (event) {
 
                     //penalize the player and display the updated guesses left
                     gameObj.guessesLeft--;
-                    guessesLeftEl.innerHTML = gameObj.guessesLeft + " years in office remaining";
+
+                    //grammar!
+                    var yearsLeft = gameObj.guessesLeft === 1 ? " year " : " years ";
+                   
+                    guessesLeftEl.innerHTML = gameObj.guessesLeft + yearsLeft + "in office remaining";
                 }
             }
 
