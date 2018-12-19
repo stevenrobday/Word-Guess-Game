@@ -40,7 +40,7 @@ body{
 #table{
     display: flex;
     flex-direction: row;
-    margin-top: 2vw;
+    margin-top: 6vw;
 }
 
 #info, #gameEl{
