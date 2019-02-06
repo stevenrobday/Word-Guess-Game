@@ -126,8 +126,8 @@ body{
 .key, #startGame, #startRound {
     border: 2px solid #fff;
     border-radius: 6px;
-    padding: calc(var(--font-size-s)/4);
-    margin: calc(var(--font-size-s)/6);
+    padding: calc(var(--font-size-s)/3);
+    margin: calc(var(--font-size-s)/5);
     cursor: pointer;
 }
 
