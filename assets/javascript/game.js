@@ -15,9 +15,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var score = document.getElementById("score");
     var wins = document.getElementById("wins");
     var losses = document.getElementById("losses");
+    var virtualKeys = document.getElementById("virtualKeys");
 
-    //hide score display
+    //hide score display and virtual keyboard
     score.style.display = "none";
+    virtualKeys.style.display = "none";
 
     //create game object
     var gameObj = {
@@ -139,6 +141,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         //lose condition
         if (gameObj.guessesLeft === 0) {
+            //hide keyboard
+            virtualKeys.style.display = "none";
+
             //clear elements
             playerAnswerEl.innerHTML = "";
             incorrectGuessesEl.innerHTML = "";
@@ -147,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             //declare the player a Commie
             gameEl.style.backgroundColor = "#ff61b2";
             gameHeader.innerHTML = "<div>GAME OVER!</div><div id='headerPic'><img src = 'assets/images/marx.jpg' width='400'></div><div>YOU ARE A COMMUNIST SPY!</div>";
-            message.innerHTML = "Ooh, I spy a Communist spy!  Well, here in America, we don't tolerate villainy from you pinkos!  You'll be ground red meat by the time my CIA is through with the likes of you!  Or, you can push '1' to try again...";
+            message.innerHTML = "Ooh, I spy a Communist spy!  Well, here in America, we don't tolerate villainy from you pinkos!  You'll be ground red meat by the time my CIA is through with the likes of you!  Or, you can push '1' or <span id='startRound'>1</span> to try again...";
 
             //calc losses
             gameObj.losses++;
@@ -162,6 +167,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
         //win condition
         else if (gameObj.playerAnswer.indexOf("_") === -1) {
+            //hide keyboard
+            virtualKeys.style.display = "none";
+
             //clear elements
             playerAnswerEl.innerHTML = "";
             incorrectGuessesEl.innerHTML = "";
@@ -200,14 +208,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 var politiciansLeft = answersArray.length === 1 ? "politician awaits" : "politicians await";
 
                 message.innerHTML = "Ooh, that was a lucky guess! " + answersArray.length + " remaining " 
-                + politiciansLeft + " your challenge! Press '1' for the next round!";
+                + politiciansLeft + " your challenge! Press '1' or <span id='startRound'>1</span> for the next round!";
 
                 gameObj.state = GAME_STATE_END_ROUND;
             }
 
             //otherwise, Ronnie takes a nap
             else {
-                message.innerHTML = "Well, that's all the politicians I can think of, and it's now nap time!  If you ever want to guess from the same list of politicians again, refresh the page!  I'll be waiting...";
+                message.innerHTML = "Well, that's all the politicians I can think of, and it's now nap time!  If you ever want to guess from the same list of politicians again, wake me up by pushing '1' or <span id='startGame'>1</span>!  I'll be waiting...";
 
                 //set game state back to title so vars will be reset if user wants to play again
                 gameObj.state = GAME_STATE_TITLE;
@@ -215,6 +223,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     }
 
+    //physical keyboard
     document.onkeyup = function (event) {
         switch (gameObj.state) {
 
@@ -236,12 +245,57 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 var guess = event.key.toUpperCase();
 
                 //return if guess is anything other than a single upper case (English) letter
-                if (guess.length > 1 || !guess.match(/[A-Z]/)) {
-                    return;
-                }
+                if (guess.length > 1 || !guess.match(/[A-Z]/)) return;
 
                 playRound(guess);
                 break;
         }
     }
+
+    //virtual keys
+    var keys = [
+        ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+        ["Z", "X", "C", "V", "B", "N", "M"]
+    ];
+
+    //create keys
+    for (var i = 0; i < 3; i++) {
+        var outerDiv = document.createElement("div");
+        outerDiv.id = "outerDiv" + i;
+        virtualKeys.appendChild(outerDiv);
+        var outerElement = document.getElementById("outerDiv" + i);
+
+        for (var j = 0; j < keys[i].length; j++){
+            var div = document.createElement("div");
+            div.innerHTML = keys[i][j];
+            div.setAttribute("class", "key");
+            div.value =  keys[i][j];
+            outerElement.appendChild(div);
+        }
+    }
+
+    var key = document.getElementsByClassName("key");
+
+    //add event listeners to keys
+    for (var i = 0; i < key.length; i++){
+        key[i].addEventListener("click", function(){
+            playRound(this.value);
+        });
+    }
+
+    //push 1 key
+    document.addEventListener("click", function(e){
+        if(e.target.id === "startGame"){
+            virtualKeys.style.display = "block";
+            startGame();
+        }
+    });
+
+    document.addEventListener("click", function(e){
+        if(e.target.id === "startRound"){
+            virtualKeys.style.display = "block";
+            startRound();
+        }
+    });
 });

@@ -1,3 +1,46 @@
+:root {
+    /* font size dynamic vars */
+    --font-size-s: 1rem;
+    --font-size-m: 1.2rem;
+    --font-size-l: 1.4rem;
+}
+  
+/* 560px */
+@media screen and (min-width: 35rem) {
+    :root {
+      --font-size-s: 1.3rem;
+      --font-size-m: 1.6rem;
+      --font-size-l: 1.9rem;
+    }
+}
+  
+/* 1616px */
+@media screen and (min-width: 101rem) {
+    :root {
+      --font-size-s: 2rem;
+      --font-size-m: 2.3rem;
+      --font-size-l: 2.6rem;
+    }
+}
+
+/* 1920px */
+@media screen and (min-width: 120rem) {
+    :root {
+      --font-size-s: 2.1rem;
+      --font-size-m: 2.4rem;
+      --font-size-l: 2.7rem;
+    }
+}
+  
+/* 2400px */
+@media screen and (min-width: 150rem) {
+    :root {
+      --font-size-s: 2.7rem;
+      --font-size-m: 3rem;
+      --font-size-l: 3.3rem;
+    }
+}
+
 /*I made this font on https://fontstruct.com/ years ago!*/
 
 @font-face {
@@ -10,16 +53,9 @@
     box-sizing: border-box;
 }
 
-/*
-    I'm using the following formula (I found it online and used it previously 
-    on my webpage) because it scales well to different resolutions, and I don't 
-    want the formatting getting wrecked if the user zooms in or resizes:
-    calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
-*/
-
 body{
     font-family: 'retro';
-    font-size: calc(8px + (64 - 8) * ((100vw - 300px) / (3840 - 300)));
+    font-size: var(--font-size-s);
     background-color: #000000;
     color: #ffffff;
     text-align: center;
@@ -27,20 +63,20 @@ body{
 
 #header{
     width: 100%;
-    font-size: calc(16px + (96 - 16) * ((100vw - 300px) / (3840 - 300)));
+    font-size: var(--font-size-l);
     background-color: #b21030;
 }
 
 #subHeader{
     width: 100%;
-    font-size: calc(12px + (80 - 12) * ((100vw - 300px) / (3840 - 300)));
+    font-size: var(--font-size-m);
     background-color: #2800ba;
 }
 
 #table{
     display: flex;
     flex-direction: row;
-    margin-top: 6vw;
+    margin-top: 6%;
 }
 
 #info, #gameEl{
@@ -48,7 +84,7 @@ body{
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 #gameEl{
@@ -56,8 +92,8 @@ body{
 }
 
 #reagan, #headerPic{
-    margin: 1vw auto;
-    width: 20vw;
+    margin: 1% auto;
+    width: 40%;
 }
 
 #reagan img, #headerPic img{
@@ -82,4 +118,19 @@ body{
     border-right: 8px dotted #ffffff;
 }
 
+#virtualKeys > div {
+    display: flex;
+    justify-content: center;
+}
 
+.key, #startGame, #startRound {
+    border: 2px solid #fff;
+    border-radius: 6px;
+    padding: calc(var(--font-size-s)/4);
+    margin: calc(var(--font-size-s)/6);
+    cursor: pointer;
+}
+
+.key:active, #startGame:active, #startRound:active {
+    transform: translate(0, 2px);
+}
