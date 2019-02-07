@@ -84,7 +84,11 @@ body{
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+#info {
+    padding: calc(var(--font-size-s)/3);
 }
 
 #gameEl{
